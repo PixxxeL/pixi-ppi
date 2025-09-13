@@ -1,0 +1,17 @@
+{
+  "name": "pixi-ppi",
+  "version": "1.0.0",
+  "description": "Pixel perfect sprite interactive for Pixi.js framework",
+  "homepage": "https://github.com/pixxxel/pixi-ppi",
+  "bugs": {
+    "url": "https://github.com/pixxxel/pixi-ppi/issues",
+    "email": "piksel@mail.ru"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixxxel/pixi-ppi.git"
+  },
+  "license": "MIT",
+  "author": "piksel@mail.ru",
+  "main": "pixel-solver.js"
+}

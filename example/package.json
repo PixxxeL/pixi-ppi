@@ -1,0 +1,16 @@
+{
+  "name": "pixi-ppi-example",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "pixi.js": "^8.12.0",
+    "pixi-ppi": "file:..",
+    "vite": "^4.4.5"
+  }
+}
