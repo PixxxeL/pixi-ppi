@@ -13,5 +13,8 @@
   },
   "license": "MIT",
   "author": "piksel@mail.ru",
-  "main": "pixel-solver.js"
+  "main": "pixel-solver.js",
+  "devDependencies": {
+    "pixi.js": ">=8"
+  }
 }

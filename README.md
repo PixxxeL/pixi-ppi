@@ -1,6 +1,6 @@
 # pixi-ppi
 
-Pixel perfect sprite interactive for Pixi.js framework.
+Pixel perfect sprite interactive for [Pixi.js framework](https://pixijs.com).
 
 For example usage see in `example` subdirectory. Example running is:
 
