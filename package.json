@@ -1,6 +1,6 @@
 {
   "name": "pixi-ppi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pixel perfect sprite interactive for Pixi.js framework",
   "homepage": "https://github.com/pixxxel/pixi-ppi",
   "bugs": {

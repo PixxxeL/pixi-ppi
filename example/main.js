@@ -7,7 +7,7 @@ const onContainerDown = (e) => {
     const objects = e.target
     const { x, y } = e.getLocalPosition(objects)
     let finded = objects.children.filter((s) => {
-        // This is because anchor point is on cebter
+        // This evaluations because anchor point is on cebter
         const hw = s.width * .5
         const hh = s.height * .5
         const h = x > (s.x - hw) && x < (s.x - hw) + s.width
@@ -18,14 +18,21 @@ const onContainerDown = (e) => {
             const yline = Math.floor(pos.y + hh)
             // Main invoking
             const pixel = PixelSolver.solve(s, xline, yline)
-            // Optional. This for debug draw in top-right corner
-            dbg(s, xline, yline)
+            s.store = {
+                pointer: { xline, yline, pixel }
+            }
             return pixel > PixelSolver.threshold
         }
     })
+    finded = finded.sort((a, b) => a.zIndex < b.zIndex)[0]
+    if (finded) {
+        // Optional debug, but make payload here
+        const { xline, yline } = finded.store.pointer
+        dbg(finded, xline, yline)
+    }
 }
 
-const App = async () => {
+(async () => {
     // Important step!
     PixelSolver.init()
 
@@ -53,14 +60,22 @@ const App = async () => {
     container.on('pointerdown', onContainerDown)
     app.stage.addChild(container)
 
-    // Tested sprite
+    // Tested sprites
+    const deathstarTexture = await Assets.load('assets/deathstar.png')
+    let deathstar = new Sprite(deathstarTexture)
+    deathstar.label = 'deathstar'
+    deathstar.zIndex = 1
+    deathstar.anchor.set(.5)
+    deathstar.x = app.screen.width * .5 + 200
+    deathstar.y = app.screen.height * .5 + 50
+    container.addChild(deathstar)
+
     const starshipTexture = await Assets.load('assets/starship.png')
     let ship = new Sprite(starshipTexture)
     ship.label = 'ship'
+    ship.zIndex = 2
     ship.anchor.set(.5)
-    ship.x = app.screen.width * .5
-    ship.y = app.screen.height * .5
+    ship.x = app.screen.width * .5 - 100
+    ship.y = app.screen.height * .5 + 100
     container.addChild(ship)
-}
-
-App()
+})()

@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 
 
-const SIZE = 300
+const SIZE = 1000
 
 /**
 @Usage:
@@ -36,7 +36,7 @@ class PixelSolver {
             console.warn(`PixelSolver: pixel index ${idx} is out of range ${pixels.length}!`)
         }
         else {
-            return pixels[idx]
+            return pixels[idx + 3]
         }
     }
 

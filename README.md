@@ -2,13 +2,15 @@
 
 Pixel perfect sprite interactive for [Pixi.js framework](https://pixijs.com).
 
-For example usage see in `example` subdirectory. Example running is:
+For usage example see in `example` subdirectory. Example running is:
 
 ```shell
 cd example
-npm i
+npm i # first time only
 npx vite
 ```
+
+See example online on https://pixi-ppi.pixel-tyumen.ru
 
 ## Installation
 
@@ -18,7 +20,7 @@ npm i -D pixi-ppi
 
 ## Usage
 
-Somewhere in initialize method:
+Somewhere in initialize of Pixi application method:
 
 ```javascript
 PixelSolver.init()
@@ -39,8 +41,8 @@ Pointer event handler:
 const onContainerDown = (e) => {
     const objects = e.target
     const { x, y } = e.getLocalPosition(objects)
-    objects.children.forEach((s) => {
-        // This is because anchor point of sprites is on cebter
+    let finded = objects.children.filter((s) => {
+        // This evaluations because anchor point is on cebter
         const hw = s.width * .5
         const hh = s.height * .5
         const h = x > (s.x - hw) && x < (s.x - hw) + s.width
@@ -51,10 +53,19 @@ const onContainerDown = (e) => {
             const yline = Math.floor(pos.y + hh)
             // Main invoking
             const pixel = PixelSolver.solve(s, xline, yline)
-            // Optional. This for debug draw in top-right corner
-            //dbg(s, xline, yline)
+            s.store = {
+                pointer: { xline, yline, pixel }
+            }
             return pixel > PixelSolver.threshold
         }
     })
+    finded = finded.sort((a, b) => a.zIndex < b.zIndex)[0]
+    if (finded) {
+        // Optional debug, but make payload here
+        const { xline, yline } = finded.store.pointer
+        dbg(finded, xline, yline)
+    }
 }
 ```
+
+You may change `PixelSolver.threshold` member value from 0 to 255 for sensitivity of opaque.
