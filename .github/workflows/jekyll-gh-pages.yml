@@ -33,6 +33,7 @@ jobs:
         with:
           node-version: 'lts/*'
           cache: 'npm'
+          cache-dependency-path: './example/package-lock.json'
       - name: Install dependencies
         run: npm i
         working-directory: ./example
